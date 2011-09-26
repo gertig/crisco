@@ -4,7 +4,8 @@ require 'redis'
 set :env, (ENV['RACK_ENV'] ? ENV['RACK_ENV'].to_sym : :development)
 
 if ENV['RACK_ENV']
-  raise ENV['RACK_ENV'].to_sym
+  puts "EEEEEEEEEEEEEEEEEENVIRONMENT"
+  puts ENV['RACK_ENV'].to_sym
 end
 
 configure :production do
