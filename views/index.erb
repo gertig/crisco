@@ -1,5 +1,16 @@
-<h1>Home</h1>
 
-<p>
-  This is a sinatra template created by Andrew Gertig.
-</p>
+	<div class="container">
+		<h1>shortlink app</h1>
+		<form method="post">
+			<input type="text" value="<%= h(params[:url]) %>" name="url" id="url" />
+			<input type="submit" value="shorten" id="submit" />
+		</form>
+		<div class="clear"></div>
+		<% if @shortcode %>
+		<div class="result">
+			Your shortened URL is:
+			<a href="http://ten.io/<%= @shortcode %>">http://ten.io/<%= @shortcode %></a>
+		</div>
+		<% end %>
+	</div>
+
