@@ -1,18 +1,28 @@
 require 'sinatra'
 require 'redis'
 
-# set :env, (ENV['RACK_ENV'] ? ENV['RACK_ENV'].to_sym : :development)
-set :env, (ENV['RACK_ENV'] ? :production : :development)
-
-configure :production do
-  uri = URI.parse(ENV["REDISTOGO_URL"])
-  redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
-end
+set :env, (ENV['RACK_ENV'] ? ENV['RACK_ENV'].to_sym : :development)
+#set :env, (ENV['RACK_ENV'] ? :production : :development)
 
 configure :development do
-  redis = Redis.new
+  ENV["REDISTOGO_URL"] = 'redis://localhost:6379' 
+  
+  #redis = Redis.new
   puts "Interesting, the environment is development"
 end
+
+configure do
+  uri = URI.parse(ENV["REDISTOGO_URL"])
+  puts uri.host
+  puts uri.port
+  puts uri.password
+  REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password) #REDIS is in all caps so its treated as a fixed variable
+  #REDIS = Redis.new
+  puts "I hope this parsed"
+end
+
+
+#redis = Redis.new
 
 
 ####
@@ -41,7 +51,7 @@ end
 post '/' do
   if params[:url] and not params[:url].empty?
     @shortcode = random_string(5)
-    redis.setnx("links:#{@shortcode}", params[:url]) # .setnx = Set if n exists
+    REDIS.setnx("links:#{@shortcode}", params[:url]) # .setnx = Set if n exists
     
     #The ‘links:’ part of the key isn’t strictly required, but it’s good practice 
     #to split your Redis keys into namespaces so if you decide later on to store 
@@ -51,6 +61,6 @@ post '/' do
 end
 
 get '/:shortcode' do
-  @url = redis.get("links:#{params[:shortcode]}")
+  @url = REDIS.get("links:#{params[:shortcode]}")
   redirect @url || '/'
 end
