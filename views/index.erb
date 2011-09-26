@@ -1,6 +1,9 @@
 
 	<div class="container">
 		<h1>shortlink app</h1>
+    <!-- <%# if @env %>
+      <h2><%#= @env %></h2>
+    <%# end %> -->
 		<form method="post">
 			<input type="text" value="<%= h(params[:url]) %>" name="url" id="url" />
 			<input type="submit" value="shorten" id="submit" />

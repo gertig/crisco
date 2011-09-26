@@ -1,12 +1,8 @@
 require 'sinatra'
 require 'redis'
 
-set :env, (ENV['RACK_ENV'] ? ENV['RACK_ENV'].to_sym : :development)
-
-if ENV['RACK_ENV']
-  puts "EEEEEEEEEEEEEEEEEENVIRONMENT"
-  puts ENV['RACK_ENV'].to_sym
-end
+# set :env, (ENV['RACK_ENV'] ? ENV['RACK_ENV'].to_sym : :development)
+set :env, (ENV['RACK_ENV'] ? :production : :development)
 
 configure :production do
   uri = URI.parse(ENV["REDISTOGO_URL"])
@@ -36,6 +32,9 @@ end
 # ROUTES
 ####
 get '/' do
+  # if ENV['RACK_ENV']
+  #   @env = ENV['RACK_ENV'].to_sym
+  # end
   erb :index
 end
 
