@@ -2,7 +2,7 @@ body {
 	font-family:"Gill Sans", "Gill Sans MT", Sans-Serif;
 }
 .container {
-	width:400px;
+	width:410px;
 	margin:120px auto 0px auto;
 }
 h1 {
@@ -57,4 +57,8 @@ input {
 	color:#ff2d11;
 	background:#ffd2cc;
 	padding:8px;
+}
+
+.hidden_item {
+  display: none;
 }
