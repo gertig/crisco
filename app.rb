@@ -75,7 +75,7 @@ post '/' do
     REDIS.setnx("links:#{@shortcode}:clicks", 0)
     
     #The ‘links:’ part of the key isn’t strictly required, but it’s good practice 
-    #to split your Redis keys into namespaces so if you decide later on to store 
+    #to split your Redis keys into namespaces in case you decide later on to store 
     #more information in the same database,
   end
   #erb :index

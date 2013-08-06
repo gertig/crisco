@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-rvm use 1.9.2-p290@tenio --create
-=======
-rvm use 1.9.2-p290@redis-short --create
->>>>>>> cd7645716b32a84f5767e57af55464e86fe2f60c

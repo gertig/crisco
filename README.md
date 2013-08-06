@@ -1,0 +1,1 @@
+A Sinatra based URL shortener that uses Redis. Heroku ready.
